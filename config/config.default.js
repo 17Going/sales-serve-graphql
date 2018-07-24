@@ -6,8 +6,7 @@ module.exports = appInfo => {
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + 'zdluoa';
 
-  // config.baseDir = "/";
-
+  // 配置数据源
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
     database: 'graphql',
@@ -17,6 +16,7 @@ module.exports = appInfo => {
     password: '123456',
   };
 
+  // 配置gql
   config.graphql = {
     router: '/graphql',
     // 是否加载到 app 上，默认开启
@@ -25,8 +25,8 @@ module.exports = appInfo => {
     agent: false,
   };
 
+  // 剔除csrf校验
   config.security = {
-    // domainWhiteList: [ 'http://localhost:8080' ],
     csrf: {
       ignore: () => true,
     },
@@ -37,21 +37,16 @@ module.exports = appInfo => {
     grants: ['password'], // 密码模式
   };
 
-  // config.cors = {
-  //   origin: '*',
-  //   allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
-  //   credentials: true
-  // };
-
   config.error = {
     match: '/graphql',
   };
 
+  // 配置鉴权中间件
   config.oauth = {
     match: '/graphql',
   };
 
-  // add your config here
+  // 配置中间件
   config.middleware = ['error', 'oauth', 'graphql'];
 
   return config;
