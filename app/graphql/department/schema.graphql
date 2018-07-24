@@ -1,0 +1,13 @@
+type User {
+  id: ID!
+  depName: String!
+  parentId: Int,
+  status: Int
+}
+# 输入类型
+input UserView {
+    id: ID
+    depName: String
+    parentId: Int,
+    status: Int
+}
