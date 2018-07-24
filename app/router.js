@@ -5,5 +5,6 @@
  */
 module.exports = app => {
   const { router, controller } = app;
-  router.get('/', controller.home.index);
+  router.all('/authorization', controller.authorization.index);
+  router.post('/login', app.oAuth2Server.token());
 };

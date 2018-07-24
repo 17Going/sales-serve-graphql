@@ -13,7 +13,12 @@ exports.sequelize = {
     package: 'egg-sequelize'
 }
 
-exports.cors = {
+// exports.cors = {
+//     enable: true,
+//     package: 'egg-cors',
+// };
+
+exports.oAuth2Server = {
     enable: true,
-    package: 'egg-cors',
-  };
+    package: 'egg-oauth2-server',
+};

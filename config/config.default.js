@@ -4,7 +4,9 @@ module.exports = appInfo => {
   const config = exports = {};
 
   // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + '_1532154438794_2847';
+  config.keys = appInfo.name + 'zdluoa';
+
+  // config.baseDir = "/";
 
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
@@ -30,14 +32,27 @@ module.exports = appInfo => {
     },
   }
 
-  config.cors = {
-    origin: '*',
-    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
-    credentials: true
+  // 配置oath2鉴权
+  config.oAuth2Server = {
+    grants: ['password'], // 密码模式
+  };
+
+  // config.cors = {
+  //   origin: '*',
+  //   allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+  //   credentials: true
+  // };
+
+  config.error = {
+    match: '/graphql',
+  };
+
+  config.oauth = {
+    match: '/graphql',
   };
 
   // add your config here
-  config.middleware = ['graphql'];
+  config.middleware = ['error', 'oauth', 'graphql'];
 
   return config;
 };

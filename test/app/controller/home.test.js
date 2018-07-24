@@ -3,36 +3,50 @@
 const { app, assert } = require('egg-mock/bootstrap');
 
 describe('test/app/controller/home.test.js', () => {
+  let authorization;
+  let access_token;
+  before(async () => {
+    await app.httpRequest()
+      .get('/authorization')
+      .expect(200)
+      .then(res=>{
+        authorization = res.body.authorization
+        assert(authorization)
+      })
+  });
 
-  // it('should assert', function* () {
-  //   const pkg = require('../../../package.json');
-  //   assert(app.config.keys.startsWith(pkg.name));
+  it('login', async () => {
+    return await app.httpRequest()
+      .post('/login')
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('authorization', authorization)
+      .send({
+        grant_type: 'password',
+        username: 'zdluoa',
+        password: 'zdluoa',
+      })
+      .expect(200)
+      .then(res=>{
+        console.log(res.body);
+        access_token = res.body.token_type +' '+res.body.access_token;
+      })
+  });
 
-  //   // const ctx = app.mockContext({});
-  //   // yield ctx.service.xx();
-  // });
 
-  // it('should GET /', () => {
-  //   return app.httpRequest()
-  //     .get('/')
-  //     .expect('hi, egg')
-  //     .expect(200);
-  // });
-
-
-  it('controller 创建公司 或 部门', () => {
-    app.mockCsrf();
+  it('权限验证', () => {
+    // app.mockCsrf();
     return app.httpRequest()
       .post('/graphql')
-      .send(
-        {
+      // .set('Authorization', access_token)
+      .send({
           // operationName:"createUser2",
-          "query": `($name: String!, $name_dd: String) {
-              createUser( name: $name, name_dd:  $name_dd) {
-                id
-                name
-              }
-            }`,
+          "query": `query{
+            user(id: [1,2,3,4]){
+              id
+              name
+              name_dd
+            }
+          }`,
           "variables": {
             name: 'zdluoa',
             name_dd: 'as'
@@ -41,8 +55,9 @@ describe('test/app/controller/home.test.js', () => {
       )
       // .expect(200)
       .then(res => {
-        console.log(res)
-        console.log(res.body.data);
+        // console.log(res)
+        // console.log(res.body);
+        console.log(res.body);
       })
   });
 
