@@ -14,6 +14,7 @@ module.exports = app => {
       this.ctx = ctx;
     }
 
+    // 进行客户端验证
     async getClient(clientId, clientSecret) {
       const client = nconf.get('client');
       if (clientId !== client.clientId || clientSecret !== client.clientSecret) {
@@ -22,6 +23,7 @@ module.exports = app => {
       return client;
     }
 
+    // 进行用户验证
     async getUser(username, password) {
       const user = nconf.get('user');
       if (username !== user.username || password !== user.password) {
@@ -30,6 +32,7 @@ module.exports = app => {
       return { userId: user.id };
     }
 
+    // 保存token
     async saveToken(token, client, user) {
       const _token = Object.assign({}, token, { user }, { client });
       nconf.set('token', _token);
@@ -37,6 +40,7 @@ module.exports = app => {
       return _token;
     }
 
+    // 校验token
     async getAccessToken(bearerToken) {
       const token = nconf.get('token');
       token.accessTokenExpiresAt = new Date(token.accessTokenExpiresAt);
