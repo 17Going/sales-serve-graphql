@@ -47,7 +47,8 @@ module.exports = appInfo => {
   };
 
   // 配置中间件
-  config.middleware = ['error', 'oauth', 'graphql'];
+  // config.middleware = ['error', 'oauth', 'graphql'];
+  config.middleware = ['error', 'graphql'];
 
   return config;
 };

@@ -2,12 +2,15 @@
 module.exports = {
   Query: {
     department(root, { id }, ctx) {
-      return ctx.connector.departent.fetchByIds(id);
+      return ctx.connector.department.fetchById(id);
     },
+    departments(root, args, ctx) {
+      return ctx.connector.department.findAll();
+    }
   },
   Mutation: {
     createDept(root, args, ctx) {
-      return ctx.connector.departent.create(args);
+      return ctx.connector.department.create(args);
     }
   }
 };

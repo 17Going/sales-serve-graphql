@@ -22,5 +22,5 @@ module.exports = app => {
         }
     });
 
-    return User;
+    return Dept;
 };

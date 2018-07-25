@@ -6,4 +6,7 @@ type Mutation {
 
   # department
   createDept(depName: String!, parentId: Int): Department
+
+  # employee
+  createEmp(emp: EmployeeInput): Employee
 }
