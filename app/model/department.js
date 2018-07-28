@@ -9,7 +9,7 @@ module.exports = app => {
         DATE
     } = app.Sequelize;
 
-    const Dept = app.model.define('department', {
+    const Department = app.model.define('department', {
         depName: STRING, // 部门名称
         parentId: {
             type: INTEGER,// 上级部门ID
@@ -22,5 +22,5 @@ module.exports = app => {
         }
     });
 
-    return Dept;
+    return Department;
 };

@@ -3,6 +3,7 @@ type Employee {
   name: String!
   pwd: String!
   deptId: Int!
+  department: Department
 }
 
 # 输入类型

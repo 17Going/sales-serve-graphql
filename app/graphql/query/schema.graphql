@@ -3,5 +3,5 @@ type Query {
   department(id: ID!): Department
   departments: [Department]
 
-  employee(id: [ID!]): [Employee]
+  employee(id: ID!): Employee
 }

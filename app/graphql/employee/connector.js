@@ -15,7 +15,9 @@ class EmployeeConnector {
           $in: ids,
         },
       },
+      include: [this.ctx.app.model.Department]
     }).then(us => us.map(u => u.toJSON()));
+    
     return employees;
   }
 

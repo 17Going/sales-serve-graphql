@@ -2,7 +2,7 @@
 module.exports = {
   Query: {
     employee(root, { id }, ctx) {
-      return ctx.connector.employee.fetchByIds(id);
+      return ctx.connector.employee.fetchById(id);
     },
   },
   Mutation: {

@@ -44,7 +44,7 @@ describe('test/app/controller/dept.test.js', () => {
             }
           }`,
           "variables": {
-            id: 13
+            id: 1
           }
         }
       )
